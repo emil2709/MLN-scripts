@@ -1,0 +1,23 @@
+global {
+	project superclass-one
+}
+
+superclass common {
+	openstack {
+		image Ubuntu16.04
+		flavor m1.small
+		keypair master
+	}
+	network eth0 {
+		net netsys_net
+	}
+}
+
+host machine01 {
+	
+}
+
+host machine02 {
+
+}
+
