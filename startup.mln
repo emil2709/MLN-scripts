@@ -1,0 +1,29 @@
+global {
+	project startup
+}
+
+superclass common {
+	openstack {
+		image Ubuntu16.04
+		flavor m1.small
+		keypair master
+	}
+	network eth0 {
+		net netsys_net
+	}
+}
+
+host start1 {
+	superclass common
+	openstack {
+		user_data {
+			touch startup.txt
+			echo "Vellykket!" > startup.txt
+		}
+	}
+	network eth0 {
+		floating-ip 128.39.121.47
+	}
+	
+}
+

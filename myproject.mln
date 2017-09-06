@@ -1,0 +1,15 @@
+global {
+	project example
+}
+
+host first {
+	openstack {
+		image Ubuntu16.04
+		flavor m1.small
+		keypair master
+	}
+	network eth0 {
+		net netsys_net
+		adress dhcp
+	}
+}
