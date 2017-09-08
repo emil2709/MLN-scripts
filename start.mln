@@ -1,23 +1,20 @@
 global {
-	project superclass-one
+	project starting
 }
 
-superclass common {
+host one {
 	openstack {
 		image Ubuntu16.04
 		flavor m1.small
 		keypair master
+		user_data {
+			touch ok.txt
+			echo "ok" > ok.txt
+		}
 	}
 	network eth0 {
 		net netsys_net
 	}
-}
+	
 
-host machine01 {
-	superclass common
 }
-
-host machine02 {
-	superclass common
-}
-
