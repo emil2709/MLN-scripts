@@ -1,0 +1,23 @@
+global {
+	project puppet-install
+}
+
+host puppet-01 {
+	openstack {
+		image Ubuntu16.04
+		flavor m1.small
+		keypair master
+		user_data {
+			wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb 
+			dpkg -i puppetlabs-release-pc1-xenial.deb
+			apt-get update
+			apt-get install -y puppet augeas-tools
+			puppet --version
+			systemctl start puppet
+		}
+	}
+	network eth0 {
+		net netsys_net
+		adress dhcp
+	}
+}

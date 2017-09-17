@@ -1,0 +1,31 @@
+global {
+	project puppet-manifest
+}
+
+superclass common {
+	openstack {
+		image Ubuntu16.04
+		flavor m1.small
+		keypair master
+	}
+	network eth0 {
+		net netsys_net
+		adress dhcp
+	}
+}
+
+host one-mani {
+	superclass common
+	openstack {
+	user_data {
+		wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb 
+		dpkg -i puppetlabs-release-pc1-xenial.deb
+		apt-get update
+		apt-get install -y puppet augeas-tools
+		puppet --version
+		systemctl start puppet
+		wget 10.0.1.23:80/puppet/manifest.pp
+		puppet apply manifest.pp
+	}
+	}
+}
